@@ -1,0 +1,23 @@
+<div id="bundles_child_products" style="display:none;">
+
+{% for variant in product.variants %}
+  {% if variant.metafields.bundles_app.content.size > 0 %}
+      {% assign lines = variant.metafields.bundles_app.content %}
+      {% for line in lines %}
+        {% for fields in line %}
+          	{%if fields[0] == 'title'%}
+        		{% assign title = fields[1] %}
+        	{%endif%}
+        	{%if fields[0] == 'sku'%}
+        		{% assign sku = fields[1] %}
+        	{%endif%}
+        	{%if fields[0] == 'quantity'%}
+        		{% assign quantity = fields[1] %}
+        	{%endif%}
+        {% endfor %}
+        <input id="bundle-child-product-{{ forloop.index }}" type="hidden" name="properties[_Product {{ forloop.index }}]" value="{{quantity}}x {{title}} ({{sku}})">
+      {% endfor %}
+  {% endif %}
+{% endfor %}
+
+</div>

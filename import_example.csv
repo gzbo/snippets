@@ -1,0 +1,3 @@
+bundle_product_id,bundle_variant_id,child_product_id,child_variant_id,child_quantity_in_bundle
+product_id Bundle A, variant_id Bundle A, product_id item 1, variant_id item 1, 5
+product_id Bundle A, variant_id Bundle A, product_id item 2, variant_id item 2, 5

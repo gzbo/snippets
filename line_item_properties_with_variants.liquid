@@ -1,0 +1,52 @@
+THIS DOES NOT WORK FOR ALL THEMES
+
+====
+STEP 1: add this right above the </body> tag of your product template:
+====
+<div id="bundles_child_products" style="display:none;">
+{% for variant in product.variants %}
+  {% if variant.metafields.bundles_app.content.size > 0 %}
+      <span id="bundle_{{variant.id}}" data-json='{{ variant.metafields.bundles_app.content | json}}'>
+  {% endif %}
+{% endfor %}
+</div>
+
+====
+STEP 2: add this to the callback of your linked options javascript:
+====
+
+// REMOVE THE OLD LINE ITEM PROPERTIES
+Array.from(document.querySelectorAll('.bundles_lineitemProperty')).forEach(function(item) {
+  item.parentNode.removeChild(item)
+});
+
+// GET SELECTED ITEM AND CHECK IF ITS A BUNDLE
+var bundle = document.querySelector('#bundle_'+ variant.id);   
+if( bundle != null ){
+  var json = JSON.parse( bundle.dataset.json );
+
+  // SELECT CART, IF YOU HAVE A DIFFERENT CART, CHANGE BELOW
+  var cartForm = document.querySelector("form[action='/cart/add']");
+
+  json.forEach(function (value, i) {
+    var itemNo = i +1;
+      var title = value.title;
+      var quantity = value.quantity;
+      var sku = value.sku;
+
+      // CREATE LINE ITEM PROPERTIES, IF YOU WANT TO SHOW THEM IN CART AND CHECKOUT, REMOVE _ BEFORE PRODUCT
+      var inputName = 'properties[_Product '+itemNo+']';
+      if( sku != null){
+        var inputValue = quantity + 'x ' + title + ' ['+sku+']';
+      }else{
+        var inputValue = quantity + 'x ' + title;
+      }
+      var lineItemPropertyInput = document.createElement("input");
+      lineItemPropertyInput.setAttribute('class', 'bundles_lineitemProperty');
+      lineItemPropertyInput.setAttribute('name', inputName);
+      lineItemPropertyInput.setAttribute('type', 'hidden');
+      lineItemPropertyInput.setAttribute('value', inputValue);
+
+      cartForm.appendChild(lineItemPropertyInput);
+
+});
