@@ -5,7 +5,7 @@ YOU HAVE TO USE IT AS GUIDE FOR YOUR OWN IMPLEMENTATION
 
 {% for variant in product.variants %}
   {% if variant.metafields.bundles_app.content.size > 0 %}
-      {% assign lines = variant.metafields.bundles_app.content %}
+      {% assign lines = variant.metafields.bundles_app.content.value %}
       {% for line in lines %}
         {% for fields in line %}
           	{%if fields[0] == 'title'%}
