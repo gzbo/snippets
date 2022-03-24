@@ -7,7 +7,7 @@ STEP 1: add this right above the </body> tag of your product template:
 <div id="bundles_child_products" style="display:none;">
 {% for variant in product.variants %}
   {% if variant.metafields.bundles_app.content.size > 0 %}
-      <span id="bundle_{{variant.id}}" data-json='{{ variant.metafields.bundles_app.content | json}}'>
+      <span id="bundle_{{variant.id}}" data-json='{{ variant.metafields.bundles_app.content.value | json}}'>
   {% endif %}
 {% endfor %}
 </div>
