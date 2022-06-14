@@ -1,0 +1,7 @@
+{% if product.metafields.bundles_app.in_bundles %}
+   {% for bundle in product.metafields.bundles_app.in_bundles.value %}
+      {% comment %}
+         bundle is a product drop here, so you can use that to show any information from the bundle product.
+      {% endcomment %}
+   {% endfor %}
+{% endif %}
