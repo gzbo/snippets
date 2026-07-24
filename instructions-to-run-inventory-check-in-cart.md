@@ -6,7 +6,7 @@ The app exposes each bundle's components on the bundle's product variant, so you
 
 ## Prerequisites
 
-1. **Component references enabled for your store.** Ask your Bundles app contact to enable component references for your shop. Once enabled, the app writes a metafield called `bundles_app.components` on every bundle variant.
+1. **Component references enabled for your store.** Ask Bundles support to enable component references for your shop. Once enabled, the app writes a metafield called `bundles_app.components` on every bundle variant.
 2. **Component products published to the Online Store sales channel.** The storefront can only read a component's inventory if its product is available to the Online Store. If a component is hidden or unpublished, its stock cannot be read by any storefront method, so it will be skipped. If you do not want components discoverable, you can publish them to the Online Store but hide them from search, navigation, and collections.
 3. **Inventory tracking on the components.** A component with no Shopify inventory tracking reports no quantity, so it cannot be checked.
 
